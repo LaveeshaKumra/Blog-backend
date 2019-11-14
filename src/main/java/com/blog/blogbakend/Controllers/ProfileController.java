@@ -76,7 +76,7 @@ public class ProfileController {
     }
 
 
-    @GetMapping(path = "search/{keyword}", produces = "application/json")
+    @GetMapping(path = "search/{keyword}")
     public List<Users> getSearchResult(@PathVariable("keyword") String keyword) {
         return userService.searchResult(keyword);
     }
