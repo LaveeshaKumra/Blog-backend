@@ -3,56 +3,43 @@ package com.blog.blogbakend.modals;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-
-
 @Entity
-@Table(name = "blogs")
-public class blog {
+@Table(name = "comment")
+public class Comments {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "blogid")
-    private int blogid;
-
-    @Column(name = "title", nullable = false)
-    private String title;
+    @Column(name = "commentid")
+    private int id;
 
     @Column(name = "body", columnDefinition = "TEXT")
     private String body;
-
-    @Column(name = "status")
-    private String status;
-
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_date", nullable = false, updatable = false)
     @CreationTimestamp
     private Date createDate;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
+    @JoinColumn(name = "blogid", referencedColumnName = "blogid", nullable = false)
+    @NotNull
+    private blog blog;
+
+    @ManyToOne
     @JoinColumn(name = "userid", referencedColumnName = "userid", nullable = false)
+    @NotNull
     private Users user;
 
-//    @OneToMany(mappedBy = "blogid", cascade = CascadeType.REMOVE)
-//    private Collection<Comments> comments;
 
     public int getId() {
-        return blogid;
+        return id;
     }
 
     public void setId(int id) {
-        this.blogid = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+        this.id = id;
     }
 
     public String getBody() {
@@ -71,19 +58,19 @@ public class blog {
         this.createDate = createDate;
     }
 
+    public com.blog.blogbakend.modals.blog getBlog() {
+        return blog;
+    }
+
+    public void setBlog(com.blog.blogbakend.modals.blog blog) {
+        this.blog = blog;
+    }
+
     public Users getUser() {
         return user;
     }
 
     public void setUser(Users user) {
         this.user = user;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }

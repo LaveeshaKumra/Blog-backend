@@ -32,7 +32,7 @@ public class Users implements Serializable {
     @Column(name = "status")
     private String status;
     @Column(name = "following")
-    private ArrayList<Integer> following;
+    private ArrayList<Integer> following ;
     @Column(name = "followers")
     private ArrayList<Integer> followers;
 

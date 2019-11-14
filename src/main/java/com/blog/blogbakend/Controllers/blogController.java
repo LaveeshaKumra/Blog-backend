@@ -38,6 +38,14 @@ public class blogController {
         return blogService.getBlogList();
     }
 
+    @RequestMapping(value="/getpublicBlogs",method= RequestMethod.GET)
+    @ResponseBody
+    public List<blog> getpublicBlogs()
+    {
+
+        return blogService.getpublicBlogs();
+    }
+
 
     @GetMapping(value="/getblogById/{blogid}")
     public List<blog> getBlogById(@PathVariable("blogid")int id){
@@ -63,5 +71,11 @@ public class blogController {
     public List<blog> deleteblog(@PathVariable("blogid") int blogid, Principal principal)
     {
         return blogService.deleteblog(userService.getUserId(principal),blogid);
+    }
+
+
+    @GetMapping(path = "search/{keyword}", produces = "application/json")
+    public List<blog> getSearchResult(@PathVariable("keyword") String keyword) {
+        return blogService.searchResult(keyword);
     }
 }

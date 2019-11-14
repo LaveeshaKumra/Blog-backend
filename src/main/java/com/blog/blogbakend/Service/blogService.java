@@ -6,6 +6,7 @@ import com.blog.blogbakend.modals.blog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,11 @@ public class blogService {
 
     }
 
+    public List<blog> getpublicBlogs(){
+        return BlogRepository.findByStatus("public");
+
+    }
+
     public List<blog> getBlogById(int id){
         return BlogRepository.findById(id);
     }
@@ -47,6 +53,7 @@ public class blogService {
         blog.setBody(b.getBody());
         blog.setTitle(b.getTitle());
         blog.setCreateDate(b.getCreateDate());
+        blog.setStatus(b.getStatus());
         return BlogRepository.save(blog);
     }
 
@@ -57,5 +64,23 @@ public class blogService {
         BlogRepository.delete(blog1);
         return BlogRepository.findByUser(users);
 
+    }
+
+    public List<blog> searchResult(String keyword) {
+        List<blog> itemsList = BlogRepository.findAll();
+        List<blog> foundList = new ArrayList<>();
+
+        for (blog items : itemsList) {
+            if (items.getTitle() != null && items.getBody() != null && (
+                    items.getTitle().toLowerCase().contains(keyword.toLowerCase())
+                    || items.getBody().toLowerCase().contains(keyword.toLowerCase())
+//                    || items.getCreateDate().getDate().contains(keyword)
+
+            )
+            ) {
+                foundList.add(items);
+            }
+        }
+        return foundList;
     }
 }
