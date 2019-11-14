@@ -35,6 +35,8 @@ public class Users implements Serializable {
     private ArrayList<Integer> following ;
     @Column(name = "followers")
     private ArrayList<Integer> followers;
+    @Column(name = "role")
+    private String role;
 
     public int getUserid() {
         return userid;
@@ -122,5 +124,13 @@ public class Users implements Serializable {
 
     public void setFollowers(ArrayList<Integer> followers) {
         this.followers = followers;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
