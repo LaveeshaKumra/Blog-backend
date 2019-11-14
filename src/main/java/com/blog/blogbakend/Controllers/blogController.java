@@ -75,7 +75,7 @@ public class blogController {
 
 
     @GetMapping(path = "search/{keyword}", produces = "application/json")
-    public List<blog> getSearchResult(@PathVariable("keyword") String keyword) {
-        return blogService.searchResult(keyword);
+    public List<blog> getSearchResult(@PathVariable("keyword") String keyword , Principal principal) {
+        return blogService.searchResult(keyword,principal);
     }
 }

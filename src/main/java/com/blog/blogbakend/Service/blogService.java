@@ -6,6 +6,7 @@ import com.blog.blogbakend.modals.blog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +20,8 @@ public class blogService {
     @Autowired
     private userRepository userRepository;
 
+    @Autowired
+    private currentUser currentUser;
 
     public blog addblog(blog blog,int  userid) {
         Users user = userRepository.findByUserid(userid);
@@ -66,8 +69,8 @@ public class blogService {
 
     }
 
-    public List<blog> searchResult(String keyword) {
-        List<blog> itemsList = BlogRepository.findAll();
+    public List<blog> searchResult(String keyword, Principal principal) {
+        List<blog> itemsList = currentUser.getblogsoffollowing(principal);
         List<blog> foundList = new ArrayList<>();
 
         for (blog items : itemsList) {

@@ -27,9 +27,7 @@ public class userService {
         return id;
     }
 
-    public Optional<Users> getUserProfile(Principal principal) {
-        return userRepository.findByUsername(principal.getName());
-    }
+
 
 
     public List<Users> searchResult(String keyword) {

@@ -40,8 +40,14 @@ public class ProfileController {
         return users;
     }
 
+    @GetMapping("/get/{id}")
+    public Users getdata(@PathVariable("id") int id){
+        Users user=userRepository.findByUserid(id);
+        return user;
+    }
 
-    @PutMapping("/follow/{userid}")
+
+    @GetMapping("/follow/{userid}")
     public Users follows(@PathVariable("userid") int userid, Principal principal){
         currentuser.follow(userid,principal);
         return currentuser.getUserProfile(principal);
