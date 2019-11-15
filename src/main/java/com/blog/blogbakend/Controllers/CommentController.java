@@ -34,7 +34,7 @@ public class CommentController {
 
     @PostMapping(value="/addcomment/{blogid}")
     @ResponseBody
-    public Comments addcomments(@Valid  @RequestBody Comments comment,@PathVariable("blogid")int id,  Principal principal)
+    public Comments addcomments(@RequestBody Comments comment,@PathVariable("blogid") int id,  Principal principal)
     {
         return commentService.addcomment(comment,id,userService.getUserId(principal));
     }

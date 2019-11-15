@@ -23,14 +23,12 @@ public class Comments {
     @CreationTimestamp
     private Date createDate;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "blogid", referencedColumnName = "blogid", nullable = false)
-    @NotNull
     private blog blog;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "userid", referencedColumnName = "userid", nullable = false)
-    @NotNull
     private Users user;
 
 
