@@ -15,7 +15,7 @@ public class userService {
     @Autowired
     private userRepository userRepository;
     public Optional<Users> CurrentUser(Principal prinicipal) {
-
+//find by username
         String username = prinicipal.getName();
 
         return userRepository.findByUsername(username);
@@ -31,6 +31,7 @@ public class userService {
 
 
     public List<Users> searchResult(String keyword) {
+        //any search
         List<Users> itemsList = userRepository.findAll();
         List<Users> foundList = new ArrayList<>();
 
